@@ -4,6 +4,7 @@ import com.barberhub.BarberHub.dto.UserDTO;
 import com.barberhub.BarberHub.dto.UserRequestDTO;
 import com.barberhub.BarberHub.model.UserModel;
 import com.barberhub.BarberHub.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<String> createUser(@RequestBody UserRequestDTO user) {
+    public ResponseEntity<String> createUser(@RequestBody @Valid UserRequestDTO user) {
         String userCreated = userService.createUser(user);
         return ResponseEntity.ok(userCreated);
     }
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserRequestDTO userUpdated, @PathVariable Long id) {
+    public ResponseEntity<UserDTO> updateUser(@RequestBody @Valid UserRequestDTO userUpdated, @PathVariable Long id) {
         UserDTO newUser = userService.updateUserById(userUpdated, id);
         return ResponseEntity.ok(newUser);
     }

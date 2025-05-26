@@ -1,8 +1,15 @@
 package com.barberhub.BarberHub.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class UserRequestDTO {
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email.")
     private String email;
+    @NotBlank(message = "Phone is required")
     private String phone;
 
     public String getName() {
