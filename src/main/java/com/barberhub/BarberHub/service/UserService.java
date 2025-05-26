@@ -4,6 +4,7 @@ import com.barberhub.BarberHub.dto.UserDTO;
 import com.barberhub.BarberHub.dto.UserRequestDTO;
 import com.barberhub.BarberHub.model.UserModel;
 import com.barberhub.BarberHub.repository.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,19 @@ public class UserService {
         UserModel searchUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         UserDTO userDTO = new UserDTO(searchUser);
         return userDTO;
+    }
+
+    public String deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return "User deleted with success";
+    }
+
+    public UserDTO updateUserById(UserRequestDTO userUpdated, Long id) {
+        UserModel searchUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found."));
+        searchUser.setName(userUpdated.getName());
+        searchUser.setEmail(userUpdated.getEmail());
+        searchUser.setPhone(userUpdated.getPhone());
+        userRepository.save(searchUser);
+        return new UserDTO(searchUser);
     }
 }
