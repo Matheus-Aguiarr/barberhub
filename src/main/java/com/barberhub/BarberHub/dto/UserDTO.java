@@ -2,6 +2,8 @@ package com.barberhub.BarberHub.dto;
 
 import com.barberhub.BarberHub.model.UserModel;
 
+import java.util.Optional;
+
 public class UserDTO {
     private long id;
     private String name;

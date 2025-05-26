@@ -1,15 +1,12 @@
 package com.barberhub.BarberHub.contoller;
 
+import com.barberhub.BarberHub.dto.UserDTO;
 import com.barberhub.BarberHub.dto.UserRequestDTO;
 import com.barberhub.BarberHub.model.UserModel;
 import com.barberhub.BarberHub.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +27,11 @@ public class UserController {
     public ResponseEntity<List<UserModel>> getUsers() {
         List<UserModel> users = userService.getUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+       return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping("/users")
