@@ -2,6 +2,7 @@ package com.barberhub.BarberHub.service;
 
 import com.barberhub.BarberHub.dto.UserDTO;
 import com.barberhub.BarberHub.dto.UserRequestDTO;
+import com.barberhub.BarberHub.exceptions.UserNotFoundException;
 import com.barberhub.BarberHub.model.UserModel;
 import com.barberhub.BarberHub.repository.UserRepository;
 import org.apache.catalina.User;
@@ -35,9 +36,14 @@ public class UserService {
     }
 
     public UserDTO getUserById(Long id) {
-        UserModel searchUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        UserModel searchUser = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         UserDTO userDTO = new UserDTO(searchUser);
         return userDTO;
+    }
+
+    public UserDTO getUserByEmail(String email) {
+        UserModel searchUser = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
+        return new UserDTO(searchUser);
     }
 
     public String deleteUserById(Long id) {
@@ -46,7 +52,7 @@ public class UserService {
     }
 
     public UserDTO updateUserById(UserRequestDTO userUpdated, Long id) {
-        UserModel searchUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found."));
+        UserModel searchUser = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         searchUser.setName(userUpdated.getName());
         searchUser.setEmail(userUpdated.getEmail());
         searchUser.setPhone(userUpdated.getPhone());
