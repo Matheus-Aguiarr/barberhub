@@ -1,5 +1,6 @@
 package com.barberhub.BarberHub.model;
 
+import com.barberhub.BarberHub.enums.AppointmentStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -16,10 +17,14 @@ public class AppointmentModel {
     private UserModel user;
 
     private LocalDateTime dateTime;
-    private String service;
-    private String status;
 
-    public AppointmentModel(UserModel user, LocalDateTime dateTime, String service, String status) {
+    @ManyToOne
+    @JoinColumn(name = "service_id", nullable = false)
+    private ServiceModel service;
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status;
+
+    public AppointmentModel(UserModel user, LocalDateTime dateTime, ServiceModel service, AppointmentStatus status) {
         this.user = user;
         this.dateTime = dateTime;
         this.service = service;
@@ -44,19 +49,19 @@ public class AppointmentModel {
         this.dateTime = dateTime;
     }
 
-    public String getService() {
+    public ServiceModel getService() {
         return service;
     }
 
-    public void setService(String service) {
+    public void setService(ServiceModel service) {
         this.service = service;
     }
 
-    public String getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
 
