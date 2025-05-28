@@ -6,10 +6,7 @@ import com.barberhub.BarberHub.model.ServiceModel;
 import com.barberhub.BarberHub.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,12 @@ public class ServiceController {
     @GetMapping("/services")
     public ResponseEntity<List<ServiceDTO>> getServices() {
         return ResponseEntity.ok(servicesService.getServices());
+    }
+
+
+    @GetMapping("/services/{serviceId}")
+    public ResponseEntity<ServiceDTO> getServiceById(@PathVariable Long serviceId) {
+        return ResponseEntity.ok(servicesService.getServiceById(serviceId));
     }
 
     @PostMapping("/services")
