@@ -37,8 +37,7 @@ public class UserService {
 
     public UserDTO getUserById(Long id) {
         UserModel searchUser = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-        UserDTO userDTO = new UserDTO(searchUser);
-        return userDTO;
+        return  new UserDTO(searchUser);
     }
 
     public UserDTO getUserByEmail(String email) {
