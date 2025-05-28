@@ -3,6 +3,7 @@ package com.barberhub.BarberHub.service;
 import com.barberhub.BarberHub.dto.AppointmentDTO;
 import com.barberhub.BarberHub.dto.AppointmentRequestDTO;
 import com.barberhub.BarberHub.enums.AppointmentStatus;
+import com.barberhub.BarberHub.exceptions.AppointmentNotFoundException;
 import com.barberhub.BarberHub.exceptions.ServiceNotFoundException;
 import com.barberhub.BarberHub.exceptions.UserNotFoundException;
 import com.barberhub.BarberHub.model.AppointmentModel;
@@ -52,5 +53,12 @@ public class AppointmentService {
     public List<AppointmentDTO> getAppointmentByUserId(Long userId) {
         List<AppointmentModel> searchModels = appointmentRepository.findByUserId(userId);
         return searchModels.stream().map(AppointmentDTO::new).toList();
+    }
+
+    public AppointmentDTO updateStatusOfAppointment(Long appointmentId, String status) {
+        AppointmentModel searchModel = appointmentRepository.findById(appointmentId).orElseThrow(AppointmentNotFoundException::new);
+        searchModel.setStatus(AppointmentStatus.valueOf(status.toUpperCase()));
+        AppointmentModel updated = appointmentRepository.save(searchModel);
+        return new AppointmentDTO(updated);
     }
 }
