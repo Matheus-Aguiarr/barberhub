@@ -43,4 +43,9 @@ public class ServicesService {
         ServiceModel serviceModel = serviceRepository.findById(serviceId).orElseThrow(ServiceNotFoundException::new);
         return new ServiceDTO(serviceModel);
     }
+
+    public String deleteServiceById(Long serviceId) {
+        serviceRepository.deleteById(serviceId);
+        return "Service deleted with success";
+    }
 }

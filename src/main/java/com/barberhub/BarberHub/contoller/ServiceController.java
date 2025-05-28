@@ -35,4 +35,10 @@ public class ServiceController {
     public ResponseEntity<String> createService(@RequestBody ServiceRequestDTO service) {
         return ResponseEntity.ok(servicesService.createService(service));
     }
+
+    @DeleteMapping("/services/{serviceId}")
+    public ResponseEntity<String> deleteServiceById(@PathVariable Long serviceId) {
+        return ResponseEntity.ok(servicesService.deleteServiceById(serviceId));
+    }
+
 }
