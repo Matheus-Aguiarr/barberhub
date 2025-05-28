@@ -48,4 +48,16 @@ public class ServicesService {
         serviceRepository.deleteById(serviceId);
         return "Service deleted with success";
     }
+
+    public ServiceDTO updateServiceById(Long serviceId, ServiceRequestDTO requestDTO) {
+        ServiceModel searchService = serviceRepository.findById(serviceId).orElseThrow(ServiceNotFoundException::new);
+        searchService.setPriceInCents(requestDTO.getPriceInCents());
+        searchService.setDescription(requestDTO.getDescription());
+        searchService.setName(requestDTO.getName());
+        searchService.setDurationInMinutes(requestDTO.getDurationInMinutes());
+        serviceRepository.save(searchService);
+
+        return new ServiceDTO(searchService);
+
+    }
 }

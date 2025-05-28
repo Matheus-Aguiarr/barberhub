@@ -41,4 +41,9 @@ public class ServiceController {
         return ResponseEntity.ok(servicesService.deleteServiceById(serviceId));
     }
 
+    @PutMapping("/services/{serviceId}")
+    public ResponseEntity<ServiceDTO> updateServiceById(@PathVariable Long serviceId, @RequestBody ServiceRequestDTO requestDTO) {
+        return ResponseEntity.ok(servicesService.updateServiceById(serviceId, requestDTO));
+    }
+
 }
