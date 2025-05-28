@@ -6,10 +6,7 @@ import com.barberhub.BarberHub.repository.AppointmentRepository;
 import com.barberhub.BarberHub.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +20,20 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
+    @GetMapping("/appointment")
+    public ResponseEntity<List<AppointmentDTO>> getAllAppointments() {
+        return ResponseEntity.ok(appointmentService.getAllAppointments());
+    }
+
+    @GetMapping("/appointment/userId/{userId}")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentByUserId(@PathVariable Long userId) {
+       return ResponseEntity.ok(appointmentService.getAppointmentByUserId(userId));
+    }
 
     @PostMapping("/appointment")
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody AppointmentRequestDTO appointment) {
         return ResponseEntity.ok(appointmentService.createAppointment(appointment));
     }
+
+
 }

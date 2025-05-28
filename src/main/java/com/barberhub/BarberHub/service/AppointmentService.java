@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class AppointmentService {
@@ -41,5 +42,15 @@ public class AppointmentService {
 
         AppointmentModel savedAppointment = appointmentRepository.save(appointmentModel);
         return new AppointmentDTO(savedAppointment);
+    }
+
+    public List<AppointmentDTO> getAllAppointments() {
+        List<AppointmentModel> appointmentModelList = appointmentRepository.findAll();
+        return appointmentModelList.stream().map(AppointmentDTO::new).toList();
+    }
+
+    public List<AppointmentDTO> getAppointmentByUserId(Long userId) {
+        List<AppointmentModel> searchModels = appointmentRepository.findByUserId(userId);
+        return searchModels.stream().map(AppointmentDTO::new).toList();
     }
 }
