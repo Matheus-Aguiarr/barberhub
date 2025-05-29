@@ -15,7 +15,9 @@ import com.barberhub.BarberHub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -60,5 +62,26 @@ public class AppointmentService {
         searchModel.setStatus(AppointmentStatus.valueOf(status.toUpperCase()));
         AppointmentModel updated = appointmentRepository.save(searchModel);
         return new AppointmentDTO(updated);
+    }
+
+    public List<LocalTime> getAvailableTimes(Long serviceId, LocalDate date) {
+//        Aqui estao sendo definidos manualmente todos os horarios possiveis de atendimento nesse servico
+        List<LocalTime> possibleTimes = List.of(
+                LocalTime.of(8, 0),
+                LocalTime.of(9, 0),
+                LocalTime.of(10, 0),
+                LocalTime.of(11, 0),
+                LocalTime.of(13, 0),
+                LocalTime.of(14, 0),
+                LocalTime.of(15, 0),
+                LocalTime.of(16, 0)
+        );
+
+//        Busca os appointments ja marcados nesse dia e servico
+        List<AppointmentModel> appointments = appointmentRepository.findByServiceIdAndDate(serviceId, date);
+//      Pega todos os horarios desses appointments que ja estao ocupados. No caso -> apenas transforma os appointments ignorando a data, para retornar apenas HORARIOS.
+        List<LocalTime> occupiedTimes = appointments.stream().map(a -> a.getDateTime().toLocalTime()).toList();
+//          Tras apenas os horarios que nao estao na lista de ocupados, ou seja -> se contem time em occupiedTimes, NAO LISTE ELES.
+        return possibleTimes.stream().filter(time -> !occupiedTimes.contains(time)).toList();
     }
 }
