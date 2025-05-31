@@ -56,6 +56,11 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.getAppointmentOfDate(date));
     }
 
+    @GetMapping("/appointment/confirmed")
+    public ResponseEntity<List<AppointmentDTO>> getConfirmedAppointments() {
+        return ResponseEntity.ok(appointmentService.getConfirmedAppointments());
+    }
+
     @PutMapping("/appointment/{appointmentId}/status")
     public ResponseEntity<AppointmentDTO> updateStatusOfAppointment(@PathVariable Long appointmentId, @RequestParam String status) {
         return ResponseEntity.ok(appointmentService.updateStatusOfAppointment(appointmentId, status));

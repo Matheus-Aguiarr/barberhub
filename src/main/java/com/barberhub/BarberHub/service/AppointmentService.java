@@ -115,4 +115,11 @@ public class AppointmentService {
                     .map(AppointmentDTO::new)
                         .toList();
     }
+
+    public List<AppointmentDTO> getConfirmedAppointments() {
+        List<AppointmentModel> searchAppointment = appointmentRepository.findByStatus(AppointmentStatus.CONFIRMED);
+        return searchAppointment.stream()
+                    .map(AppointmentDTO::new)
+                        .toList();
+    }
 }

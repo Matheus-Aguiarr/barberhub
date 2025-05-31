@@ -1,5 +1,6 @@
 package com.barberhub.BarberHub.repository;
 
+import com.barberhub.BarberHub.enums.AppointmentStatus;
 import com.barberhub.BarberHub.model.AppointmentModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,4 +29,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentModel, L
 
     @Query("SELECT a FROM AppointmentModel a WHERE DATE(a.dateTime) = :date")
     List<AppointmentModel> findByDate(@Param("date") LocalDate date);
+
+    @Query("SELECT a FROM AppointmentModel a WHERE a.status = :status")
+    List<AppointmentModel> findByStatus(@Param("status") AppointmentStatus status);
 }
