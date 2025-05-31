@@ -68,12 +68,19 @@ public class AppointmentService {
 //        Aqui estao sendo definidos manualmente todos os horarios possiveis de atendimento nesse servico
         List<LocalTime> possibleTimes = List.of(
                 LocalTime.of(8, 0),
+                LocalTime.of(8, 30),
                 LocalTime.of(9, 0),
+                LocalTime.of(9, 30),
                 LocalTime.of(10, 0),
+                LocalTime.of(10, 30),
                 LocalTime.of(11, 0),
+                LocalTime.of(11, 30),
                 LocalTime.of(13, 0),
+                LocalTime.of(13, 30),
                 LocalTime.of(14, 0),
+                LocalTime.of(14, 30),
                 LocalTime.of(15, 0),
+                LocalTime.of(15, 30),
                 LocalTime.of(16, 0)
         );
 
@@ -83,5 +90,29 @@ public class AppointmentService {
         List<LocalTime> occupiedTimes = appointments.stream().map(a -> a.getDateTime().toLocalTime()).toList();
 //          Tras apenas os horarios que nao estao na lista de ocupados, ou seja -> se contem time em occupiedTimes, NAO LISTE ELES.
         return possibleTimes.stream().filter(time -> !occupiedTimes.contains(time)).toList();
+    }
+
+    public String deleteAppointment(Long appointmentId) {
+        appointmentRepository.deleteById(appointmentId);
+        return "Appointment deleted";
+    }
+
+    public AppointmentDTO cancelAppointment(Long appointmentId) {
+        AppointmentModel searchAppointment = appointmentRepository.findById(appointmentId).orElseThrow(AppointmentNotFoundException::new);
+        searchAppointment.setStatus(AppointmentStatus.CANCELLED);
+        appointmentRepository.save(searchAppointment);
+        return new AppointmentDTO(searchAppointment);
+    }
+
+    public AppointmentDTO getAppointmentById(Long appointmentId) {
+        AppointmentModel searchAppointment = appointmentRepository.findById(appointmentId).orElseThrow(AppointmentNotFoundException::new);
+        return new AppointmentDTO(searchAppointment);
+    }
+
+    public List<AppointmentDTO> getAppointmentOfDate(LocalDate date) {
+        List<AppointmentModel> appointments = appointmentRepository.findByDate(date);
+        return appointments.stream()
+                    .map(AppointmentDTO::new)
+                        .toList();
     }
 }

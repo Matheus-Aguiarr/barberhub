@@ -25,4 +25,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentModel, L
     List<AppointmentModel> findByServiceIdAndDate(@Param("serviceId") Long serviceId, @Param("date") LocalDate date);
 
 //    Resumo da query -> Me retorna todos os agendamentos (AppointmentModel) que sao do servico tal (serviceId) e que estao na data tal (date), independente do horario
+
+    @Query("SELECT a FROM AppointmentModel a WHERE DATE(a.dateTime) = :date")
+    List<AppointmentModel> findByDate(@Param("date") LocalDate date);
 }

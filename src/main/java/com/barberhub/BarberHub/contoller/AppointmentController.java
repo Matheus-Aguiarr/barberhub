@@ -4,6 +4,7 @@ import com.barberhub.BarberHub.dto.AppointmentDTO;
 import com.barberhub.BarberHub.dto.AppointmentRequestDTO;
 import com.barberhub.BarberHub.repository.AppointmentRepository;
 import com.barberhub.BarberHub.service.AppointmentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,11 @@ public class AppointmentController {
        return ResponseEntity.ok(appointmentService.getAppointmentByUserId(userId));
     }
 
+    @GetMapping("appointment/{appointmentId}")
+    public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable Long appointmentId) {
+        return ResponseEntity.ok(appointmentService.getAppointmentById(appointmentId));
+    }
+
 //    Metodo que serve para retornar uma lista de horarios disponiveis, dado um ID de um servico e uma data. request => GET appointment/available-times?serviceId=1&date=2025-05-29
     @GetMapping("/appointment/available-times")
 //    Espera a data no formato YYYY-MM-DD (year, month, day)
@@ -45,9 +51,24 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.createAppointment(appointment));
     }
 
+    @GetMapping("/appointment/date")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentOfDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return ResponseEntity.ok(appointmentService.getAppointmentOfDate(date));
+    }
+
     @PutMapping("/appointment/{appointmentId}/status")
     public ResponseEntity<AppointmentDTO> updateStatusOfAppointment(@PathVariable Long appointmentId, @RequestParam String status) {
         return ResponseEntity.ok(appointmentService.updateStatusOfAppointment(appointmentId, status));
+    }
+
+    @DeleteMapping("/appointment/{appointmentId}")
+    public ResponseEntity<String> deleteAppointment(@PathVariable Long appointmentId) {
+        return ResponseEntity.ok(appointmentService.deleteAppointment(appointmentId));
+    }
+
+    @DeleteMapping("/appointment/{appointmentId}/cancel")
+    public ResponseEntity<AppointmentDTO> cancelAppointment(@PathVariable Long appointmentId) {
+        return ResponseEntity.ok(appointmentService.cancelAppointment(appointmentId));
     }
 
 }
