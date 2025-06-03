@@ -22,8 +22,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserModel> getUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> getUsers() {
+        return userRepository.findAll().stream().map(UserDTO::new).toList();
     }
 
     public String createUser(UserRequestDTO user) {
