@@ -1,5 +1,4 @@
 package com.barberhub.BarberHub.contoller;
-
 import com.barberhub.BarberHub.dto.UserDTO;
 import com.barberhub.BarberHub.dto.UserRequestDTO;
 import com.barberhub.BarberHub.model.UserModel;
@@ -10,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-//ToDo: Testar as requisicoes, criar dtos, finalizar o CRUD dos users.
 
 @RestController
 public class UserController {
