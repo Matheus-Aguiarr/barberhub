@@ -1,6 +1,5 @@
-package com.barberhub.BarberHub.repository;
+package com.barberhub.BarberHub.domain.service;
 
-import com.barberhub.BarberHub.model.ServiceModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ServiceRepository extends JpaRepository<ServiceModel, Long> {

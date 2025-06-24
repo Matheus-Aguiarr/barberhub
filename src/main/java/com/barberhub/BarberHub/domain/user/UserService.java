@@ -1,16 +1,12 @@
-package com.barberhub.BarberHub.service;
+package com.barberhub.BarberHub.domain.user;
 
-import com.barberhub.BarberHub.dto.UserDTO;
-import com.barberhub.BarberHub.dto.UserRequestDTO;
-import com.barberhub.BarberHub.exceptions.UserNotFoundException;
-import com.barberhub.BarberHub.model.UserModel;
-import com.barberhub.BarberHub.repository.UserRepository;
-import org.apache.catalina.User;
+import com.barberhub.BarberHub.dto.user.UserDTO;
+import com.barberhub.BarberHub.dto.user.UserRequestDTO;
+import com.barberhub.BarberHub.infra.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {

@@ -1,4 +1,4 @@
-package com.barberhub.BarberHub.exceptions;
+package com.barberhub.BarberHub.infra.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

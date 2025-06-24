@@ -1,6 +1,4 @@
-package com.barberhub.BarberHub.repository;
-
-import com.barberhub.BarberHub.model.UserModel;
+package com.barberhub.BarberHub.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

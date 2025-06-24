@@ -1,4 +1,4 @@
-package com.barberhub.BarberHub.exceptions;
+package com.barberhub.BarberHub.infra.exceptions;
 
 public class AppointmentNotFoundException extends RuntimeException {
     public AppointmentNotFoundException(String message) {

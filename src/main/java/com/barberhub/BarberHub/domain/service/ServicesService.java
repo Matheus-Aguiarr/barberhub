@@ -1,15 +1,12 @@
-package com.barberhub.BarberHub.service;
+package com.barberhub.BarberHub.domain.service;
 
-import com.barberhub.BarberHub.dto.ServiceDTO;
-import com.barberhub.BarberHub.dto.ServiceRequestDTO;
-import com.barberhub.BarberHub.exceptions.ServiceNotFoundException;
-import com.barberhub.BarberHub.model.ServiceModel;
-import com.barberhub.BarberHub.repository.ServiceRepository;
+import com.barberhub.BarberHub.dto.service.ServiceDTO;
+import com.barberhub.BarberHub.dto.service.ServiceRequestDTO;
+import com.barberhub.BarberHub.infra.exceptions.ServiceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ServicesService {
@@ -22,7 +19,7 @@ public class ServicesService {
     }
 
 
-    public String createService(ServiceRequestDTO service) {
+    public ServiceModel createService(ServiceRequestDTO service) {
         ServiceModel serviceModel = new ServiceModel();
 
         serviceModel.setName(service.getName());
@@ -31,12 +28,12 @@ public class ServicesService {
         serviceModel.setPriceInCents(service.getPriceInCents());
         serviceRepository.save(serviceModel);
 
-        return "Servico criado com sucesso.";
+        return  serviceModel;
     }
 
-    public List<ServiceDTO> getServices() {
-        List<ServiceModel> serviceModels = serviceRepository.findAll();
-        return serviceModels.stream().map(ServiceDTO::new).toList();
+    public Page<ServiceDTO> getServices(Pageable pageable) {
+        var page = serviceRepository.findAll(pageable).map(ServiceDTO::new);
+        return page;
     }
 
     public ServiceDTO getServiceById(Long serviceId) {

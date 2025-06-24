@@ -1,6 +1,8 @@
-package com.barberhub.BarberHub.model;
+package com.barberhub.BarberHub.domain.appointment;
 
-import com.barberhub.BarberHub.enums.AppointmentStatus;
+import com.barberhub.BarberHub.domain.service.ServiceModel;
+import com.barberhub.BarberHub.domain.user.UserModel;
+import com.barberhub.BarberHub.domain.appointment.enums.AppointmentStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

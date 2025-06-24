@@ -1,6 +1,4 @@
-package com.barberhub.BarberHub.dto;
-
-import jakarta.validation.constraints.NotBlank;
+package com.barberhub.BarberHub.dto.appointment;
 
 public class AppointmentRequestDTO {
     private Long userId;

@@ -1,7 +1,7 @@
-package com.barberhub.BarberHub.dto;
+package com.barberhub.BarberHub.dto.appointment;
 
-import com.barberhub.BarberHub.enums.AppointmentStatus;
-import com.barberhub.BarberHub.model.AppointmentModel;
+import com.barberhub.BarberHub.domain.appointment.enums.AppointmentStatus;
+import com.barberhub.BarberHub.domain.appointment.AppointmentModel;
 
 import java.time.LocalDateTime;
 

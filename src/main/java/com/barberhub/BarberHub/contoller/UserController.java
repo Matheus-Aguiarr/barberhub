@@ -1,8 +1,7 @@
 package com.barberhub.BarberHub.contoller;
-import com.barberhub.BarberHub.dto.UserDTO;
-import com.barberhub.BarberHub.dto.UserRequestDTO;
-import com.barberhub.BarberHub.model.UserModel;
-import com.barberhub.BarberHub.service.UserService;
+import com.barberhub.BarberHub.dto.user.UserDTO;
+import com.barberhub.BarberHub.dto.user.UserRequestDTO;
+import com.barberhub.BarberHub.domain.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

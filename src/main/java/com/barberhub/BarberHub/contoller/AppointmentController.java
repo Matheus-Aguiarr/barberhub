@@ -1,10 +1,8 @@
 package com.barberhub.BarberHub.contoller;
 
-import com.barberhub.BarberHub.dto.AppointmentDTO;
-import com.barberhub.BarberHub.dto.AppointmentRequestDTO;
-import com.barberhub.BarberHub.repository.AppointmentRepository;
-import com.barberhub.BarberHub.service.AppointmentService;
-import jakarta.validation.Valid;
+import com.barberhub.BarberHub.dto.appointment.AppointmentDTO;
+import com.barberhub.BarberHub.dto.appointment.AppointmentRequestDTO;
+import com.barberhub.BarberHub.domain.appointment.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

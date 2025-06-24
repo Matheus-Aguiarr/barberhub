@@ -1,9 +1,6 @@
-package com.barberhub.BarberHub.dto;
+package com.barberhub.BarberHub.dto.service;
 
-import com.barberhub.BarberHub.model.ServiceModel;
-import org.apache.catalina.Service;
-
-import java.security.Provider;
+import com.barberhub.BarberHub.domain.service.ServiceModel;
 
 public record ServiceDTO(Long id, String name, String description, Double priceInCents, Integer durationInMinutes) {
     public ServiceDTO(ServiceModel service) {

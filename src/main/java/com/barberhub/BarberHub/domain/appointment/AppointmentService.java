@@ -1,17 +1,15 @@
-package com.barberhub.BarberHub.service;
+package com.barberhub.BarberHub.domain.appointment;
 
-import com.barberhub.BarberHub.dto.AppointmentDTO;
-import com.barberhub.BarberHub.dto.AppointmentRequestDTO;
-import com.barberhub.BarberHub.enums.AppointmentStatus;
-import com.barberhub.BarberHub.exceptions.AppointmentNotFoundException;
-import com.barberhub.BarberHub.exceptions.ServiceNotFoundException;
-import com.barberhub.BarberHub.exceptions.UserNotFoundException;
-import com.barberhub.BarberHub.model.AppointmentModel;
-import com.barberhub.BarberHub.model.ServiceModel;
-import com.barberhub.BarberHub.model.UserModel;
-import com.barberhub.BarberHub.repository.AppointmentRepository;
-import com.barberhub.BarberHub.repository.ServiceRepository;
-import com.barberhub.BarberHub.repository.UserRepository;
+import com.barberhub.BarberHub.dto.appointment.AppointmentDTO;
+import com.barberhub.BarberHub.dto.appointment.AppointmentRequestDTO;
+import com.barberhub.BarberHub.domain.appointment.enums.AppointmentStatus;
+import com.barberhub.BarberHub.infra.exceptions.AppointmentNotFoundException;
+import com.barberhub.BarberHub.infra.exceptions.ServiceNotFoundException;
+import com.barberhub.BarberHub.infra.exceptions.UserNotFoundException;
+import com.barberhub.BarberHub.domain.service.ServiceModel;
+import com.barberhub.BarberHub.domain.user.UserModel;
+import com.barberhub.BarberHub.domain.service.ServiceRepository;
+import com.barberhub.BarberHub.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

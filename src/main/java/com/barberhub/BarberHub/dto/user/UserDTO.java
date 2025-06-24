@@ -1,8 +1,6 @@
-package com.barberhub.BarberHub.dto;
+package com.barberhub.BarberHub.dto.user;
 
-import com.barberhub.BarberHub.model.UserModel;
-
-import java.util.Optional;
+import com.barberhub.BarberHub.domain.user.UserModel;
 
 public record UserDTO(Long id, String name, String email, String phone) {
 

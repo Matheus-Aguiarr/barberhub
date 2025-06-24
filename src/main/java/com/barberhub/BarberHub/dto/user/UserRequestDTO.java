@@ -1,26 +1,16 @@
-package com.barberhub.BarberHub.model;
+package com.barberhub.BarberHub.dto.user;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
-
-
-@Entity
-@Table(name = "users")
-public class UserModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class UserRequestDTO {
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email.")
     private String email;
+    @NotBlank(message = "Phone is required")
     private String phone;
-
-    public UserModel(String name, String email, String phone) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public UserModel() {}
 
     public String getName() {
         return name;
@@ -44,9 +34,5 @@ public class UserModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public long getId() {
-        return id;
     }
 }
